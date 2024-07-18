@@ -1,0 +1,6 @@
+apiVersion: stable.example.com/v1
+kind: Test
+metadata:
+  name: my-new-cron-object
+spec:
+  image: images.example.com/my-image
