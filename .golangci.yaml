@@ -1,0 +1,14 @@
+# golangci.com configuration
+# https://github.com/golangci/golangci/wiki/Configuration
+linters-settings:
+  gci:
+    sections:
+    - standard
+    - default
+    - prefix(github.com/xperimental/crdunitvalidate)
+    - blank
+    - dot
+
+linters:
+  enable:
+  - gci
