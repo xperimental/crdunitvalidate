@@ -54,7 +54,7 @@ func loadCRD(scheme *runtime.Scheme, fileName string) (*apiextensionsv1.CustomRe
 	return obj.(*apiextensionsv1.CustomResourceDefinition), nil
 }
 
-func (v *Validator) Validate(ctx context.Context, resource *unstructured.Unstructured) error {
+func (v *Validator) Validate(resource *unstructured.Unstructured) error {
 	gvk := resource.GetObjectKind().GroupVersionKind()
 
 	if gvk.Group != v.crd.Spec.Group {
@@ -91,6 +91,7 @@ func (v *Validator) Validate(ctx context.Context, resource *unstructured.Unstruc
 		errList = append(errList, result.Errors...)
 	}
 
+	ctx := context.Background()
 	celValidator := cel.NewValidator(ss, true, celconfig.PerCallLimit)
 	errs, _ := celValidator.Validate(ctx, nil, ss, resource.Object, nil, celconfig.RuntimeCELCostBudget)
 	for _, e := range errs {

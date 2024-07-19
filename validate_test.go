@@ -1,7 +1,6 @@
 package crdunitvalidate
 
 import (
-	"context"
 	"os"
 	"path/filepath"
 	"testing"
@@ -57,8 +56,7 @@ spec: Invalid value: "object": image has to use our repository`,
 				t.Fatalf("error loading resource: %s", err)
 			}
 
-			ctx := context.Background()
-			err = v.Validate(ctx, resource)
+			err = v.Validate(resource)
 			errMsg := ""
 			if err != nil {
 				errMsg = err.Error()
